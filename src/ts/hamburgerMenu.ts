@@ -1,5 +1,9 @@
 export function hamburger {
 
-const menu_btn = document.querySelector(".hamburger");
+const menuBtn = document.querySelector(".hamburger") as HTMLButtonElement;
 
+
+menuBtn?.addEventListener("click", () => {
+    menuBtn.classList.toggle("is-active");
+})
 }
