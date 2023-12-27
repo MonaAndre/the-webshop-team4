@@ -158,7 +158,7 @@ header {
   position: absolute;
   color: #fff;
   background-color: #303031; //REPLACE WITH VARIABLE
-  padding: 10px 10px 0 10px;
+  padding: 10px;
   div {
     display: flex;
     align-items: center;
@@ -166,6 +166,9 @@ header {
     margin-right: 10px;
     i {
       margin: 0 5px 0 8px;
+    }
+    p {
+      margin: 0;
     }
   }
   &#isActive {
