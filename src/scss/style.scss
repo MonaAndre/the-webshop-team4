@@ -87,11 +87,11 @@ header {
 }
 
 .hamburger.isActive::before {
-  transform: translate(1px, 6px) rotate(-45deg);
+  transform: translate(2px, 8.3px) rotate(-45deg);
 }
 
 .hamburger.isActive::after {
-  transform: translate(1px, -16px) rotate(45deg);
+  transform: translate(2px, -8px) rotate(45deg);
 }
 
 .hamburger.isActive .bar {
