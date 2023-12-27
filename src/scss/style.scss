@@ -69,3 +69,41 @@ a{
     }
   }
 }
+
+.image {
+  width: 100vw;
+  border-radius: 8px;
+}
+.h1-categories {
+  text-align: center;
+  margin: 1rem;
+}
+
+.ul-categories {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.li-categories {
+  width: 40%;
+  padding: 1rem;
+  margin: 0.5rem;
+  text-align: center;
+  background-color: beige;
+  border-radius: 3px;
+}
+
+.li-categories a:visited {
+  color: black; 
+}
+
+.li-categories a:hover {
+  color: black; 
+}
+
+.li-categories a:active {
+  color: black; 
+}
