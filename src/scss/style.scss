@@ -31,14 +31,6 @@ header {
       text-decoration: none;
     }
   }
-
-  .banner {
-    display: flex;
-    top: 80px;
-    position: fixed;
-    height: 40px;
-    margin: auto;
-  }
 }
 //-------------------Hamburger icon styling-------------------
 .hamburger {
@@ -94,9 +86,15 @@ header {
   ul {
     list-style: none;
     padding: 0;
+    height: 100vh;
 
     li:nth-child(5) {
-      margin-top: 70%;
+      position: relative;
+      top: 25%;
+    }
+    li:nth-child(6) {
+      position: relative;
+      top: 25%;
     }
   }
   a {
@@ -116,5 +114,26 @@ header {
 
   &.isActive {
     left: 0;
+  }
+}
+//---------------- Banner Styling -----------
+.banner {
+  width: 100vw;
+  top: 80px;
+  position: fixed;
+  color: #fff;
+  background-color: #303031;
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 10px;
+    i {
+      margin: 0 5px 0 8px;
+    }
+  }
+  &#isActive {
+    z-index: -1;
   }
 }
