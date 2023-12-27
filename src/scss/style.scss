@@ -1,31 +1,5 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #747bff; //REPLACE WITH VARIABLE
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
 }
 
 //----------------Header Styling--------------------
@@ -71,31 +45,29 @@ header {
   background: none;
   outline: none;
   border: none;
-}
 
-.hamburger .bar,
-.hamburger::after,
-.hamburger::before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 5px;
-  background-color: #fff;
-  margin: 3px 0px;
-  transition: 0.4s;
-  border-radius: 3px;
-}
+  & .bar,
+  &::after,
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 5px;
+    background-color: #fff;
+    margin: 3px 0px;
+    transition: 0.4s;
+    border-radius: 3px;
+  }
 
-.hamburger.isActive::before {
-  transform: translate(2px, 8.3px) rotate(-45deg);
-}
-
-.hamburger.isActive::after {
-  transform: translate(2px, -8px) rotate(45deg);
-}
-
-.hamburger.isActive .bar {
-  opacity: 0;
+  &.isActive::before {
+    transform: translate(2px, 8.3px) rotate(-45deg);
+  }
+  &.isActive::after {
+    transform: translate(2px, -8px) rotate(45deg);
+  }
+  &.isActive &.bar {
+    opacity: 0;
+  }
 }
 
 //-----------------Hamburger Navigation Styling----------------
@@ -114,6 +86,10 @@ header {
   ul {
     list-style: none;
     padding: 0;
+
+    li:nth-child(5) {
+      margin-top: 70%;
+    }
   }
   a {
     display: block;
