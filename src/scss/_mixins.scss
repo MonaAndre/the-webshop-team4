@@ -1,5 +1,18 @@
-@mixin box-sixing{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@mixin box-sixing {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+//Breakpoints
+@mixin tablet {
+  @media screen and (min-width: 769px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: 1025px) {
+    @content;
+  }
 }
