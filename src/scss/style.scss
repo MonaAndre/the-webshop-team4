@@ -4,11 +4,14 @@
 @import "mixins";
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Infant:ital,wght@1,500&family=Hind+Madurai:wght@300&family=Montserrat:wght@700&display=swap");
 
-
-*,ul,*::before,*::after{
+*,
+ul,
+*::before,
+*::after {
   @include box-sixing;
 }
 body {
+  margin: 0;
   font-family: $font-text;
   h1,
   h2 {
@@ -25,20 +28,155 @@ body {
 ul {
   list-style: none;
 }
-a{
+a {
   text-decoration: none;
+}
 
+//----------------Header Styling--------------------
+header {
+  position: fixed;
+  top: 0;
+  height: 80px;
+  width: 100%;
+  background-color: #f9f9f9; //REPLACE WITH VARIABLE
+  display: flex;
+  z-index: 99;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+
+  button {
+    appearance: none;
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 28px;
+    margin: 0 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin: auto;
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+//-------------------Hamburger icon styling-------------------
+.hamburger {
+  position: relative;
+
+  display: block;
+  width: 35px;
+  cursor: pointer;
+  margin-left: 20px;
+
+  appearance: none;
+  background: none;
+  outline: none;
+  border: none;
+
+  & .bar,
+  &::after,
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 5px;
+    background-color: #fff;
+    margin: 3px 0px;
+    transition: 0.4s;
+    border-radius: 3px;
+  }
+
+  &.isActive::before {
+    transform: translate(2px, 8.3px) rotate(-45deg);
+  }
+  &.isActive::after {
+    transform: translate(2px, -8px) rotate(45deg);
+  }
+  &.isActive &.bar {
+    opacity: 0;
+  }
+}
+
+//-----------------Hamburger Navigation Styling----------------
+.hamburgerNav {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  min-height: 100vh;
+  display: block;
+  z-index: 98;
+  background-color: #7d8cc4; //REPLACE WITH VARIABLE
+  padding-top: 120px;
+  transition: 0.4s;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    height: 100vh;
+
+    li:nth-child(5) {
+      position: relative;
+      top: 25%;
+    }
+    li:nth-child(6) {
+      position: relative;
+      top: 25%;
+    }
+  }
+  a {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto 16px;
+    padding: 12px 16px;
+    background-color: #726da8; //REPLACE WITH VARIABLE
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      background-color: #938dd4;
+    }
+  }
+
+  &.isActive {
+    left: 0;
+  }
+}
+//---------------- Banner Styling -----------
+.banner {
+  width: 100vw;
+  top: 80px;
+  position: fixed;
+  color: #fff;
+  background-color: #303031; //REPLACE WITH VARIABLE
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 10px;
+    i {
+      margin: 0 5px 0 8px;
+    }
+  }
+  &#isActive {
+    z-index: -1;
+  }
 }
 
 .footer {
   display: flex;
   flex-direction: column;
   gap: 30px;
-  a{
-    color:$primary-white;
+  a {
+    color: $primary-white;
     transition: all 0.3s ease;
   }
-  a:hover{
+  a:hover {
     color: $accent-sec;
   }
   .help {
@@ -46,14 +184,13 @@ a{
       font-family: $font-rubric;
     }
   }
-  .nav{
+  .nav {
     width: 100%;
-    .nav-list{
+    .nav-list {
       width: 100%;
       display: flex;
       flex-direction: row;
       justify-content: space-around;
-     
     }
   }
   background-color: $primary-black;
@@ -61,11 +198,9 @@ a{
   padding: 20px;
   .contacts {
     &__list {
-      
       display: flex;
       align-items: center;
       justify-content: space-around;
-     
     }
   }
 }
@@ -97,13 +232,13 @@ a{
 }
 
 .li-categories a:visited {
-  color: black; 
+  color: black;
 }
 
 .li-categories a:hover {
-  color: black; 
+  color: black;
 }
 
 .li-categories a:active {
-  color: black; 
+  color: black;
 }
