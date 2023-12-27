@@ -31,6 +31,14 @@ header {
       text-decoration: none;
     }
   }
+
+  .banner {
+    display: flex;
+    top: 80px;
+    position: fixed;
+    height: 40px;
+    margin: auto;
+  }
 }
 //-------------------Hamburger icon styling-------------------
 .hamburger {
