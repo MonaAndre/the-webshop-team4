@@ -20,7 +20,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #747bff;
+  background-color: #747bff; //REPLACE WITH VARIABLE
 }
 
 h1 {
@@ -29,11 +29,28 @@ h1 {
 }
 
 //Header Styling
+header {
+  position: fixed;
+  top: 0;
+  height: 80px;
+  width: 100%;
+  background-color: #f9f9f9; //REPLACE WITH VARIABLE
+  display: flex;
+  z-index: 99;
+
+  h1 {
+    font-size: 2rem;
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+//-------------------Hamburger icon styling
 .hamburger {
   position: relative;
   display: block;
   width: 35px;
-  height: 35px;
   cursor: pointer;
   margin-left: 20px;
 
@@ -55,29 +72,34 @@ h1 {
   transition: 0.4s;
 }
 
-.hamburger.is-active::before {
+.hamburger.isActive::before {
   transform: translate(-9px, 6px) rotate(-45deg);
 }
 
-.hamburger.is-active::after {
+.hamburger.isActive::after {
   transform: translate(-9px, -16px) rotate(45deg);
 }
 
-.hamburger.is-active .bar {
+.hamburger.isActive .bar {
   opacity: 0;
 }
 
+//-----------------Hamburger Navigation Styling----------------
 .hamburgerNav {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 100%;
   width: 100%;
   min-height: 100vh;
   display: block;
   z-index: 98;
   background-color: #7d8cc4; //REPLACE WITH VARIABLE
   padding-top: 120px;
+  transition: 0.4s;
 
+  ul {
+    list-style: none;
+  }
   a {
     display: block;
     width: 100%;
@@ -90,6 +112,10 @@ h1 {
     &:hover {
       background-color: #938dd4;
     }
+  }
+
+  &.isActive {
+    left: 0;
   }
 }
 

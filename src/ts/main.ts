@@ -1,6 +1,10 @@
 import "./../scss/style.scss";
-import { hamburger } from "./hamburgerMenu";
 
+//----------------Hamburger Menu Functions-----------------------
 const menuBtn = document.querySelector(".hamburger") as HTMLButtonElement;
-
-menuBtn.addEventListener("click", hamburger);
+const hamburgerNav = document.querySelector(".hamburgerNav") as HTMLElement;
+//Add a listener to listen after click on hamburger menu icon
+menuBtn.addEventListener("click", () => {
+  menuBtn.classList.toggle("isActive");
+  hamburgerNav.classList.toggle("isActive");
+});
