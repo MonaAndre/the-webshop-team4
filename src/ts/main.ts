@@ -1,5 +1,4 @@
 import "./../scss/style.scss";
-import axios from "axios";
 import { Products } from "./models/products";
 
 //----------------Hamburger Menu Functions-----------------------
@@ -17,50 +16,57 @@ menuBtn.addEventListener("click", () => {
 /* Kategorier
 1. Bord
 2. Stolar
-  länkar:
-    https://ibb.co/4dQBH4N
-    https://ibb.co/WWgDSWR
-    https://ibb.co/HVQnQRp
-    https://ibb.co/HKTqHwh
-    https://ibb.co/jZnpzr1
-    https://media.istockphoto.com/id/1428278363/sv/foto/trendy-stool-with-and-build-in-storage-side-view-white-wall-space-for-text.jpg?s=612x612&w=is&k=20&c=FkQrafpbWNy5nWf1-4RNlqFKLEXRDxwen5FUaA8i2eg=
-    
 3. Soffor
 4. Sängar
 */
-const product1 = new Products("Fåtölj", 20.99, "https://ibb.co/jZnpzr1", "Description 1", "Bord", "Röd");
-const product2 = new Products("Stor ottoman", 30.49, "image2.jpg", "Description 2", "Stolar", "Blå");
-const product3 = new Products("Kontinentalsäng", 15.75, "image3.jpg", "Description 3", "Bord", "Grön");
-const product4 = new Products("Tv-bänk", 25.00, "image4.jpg", "Description 4", "Stolar", "Gul");
-const product5 = new Products("Product 5", 18.50, "image5.jpg", "Description 5", "Soffor", "Lila");
-const product6 = new Products("Product 6", 22.99, "image6.jpg", "Description 6", "sängar", "Orange");
-const product7 = new Products("Product 7", 29.95, "image7.jpg", "Description 7", "Bord", "Svart");
-const product8 = new Products("Product 8", 12.80, "image8.jpg", "Description 8", "Stolar", "Vit");
-const product9 = new Products("Product 9", 35.25, "image9.jpg", "Description 9", "sängar", "Brun");
-const product10 = new Products("Product 10", 19.99, "image10.jpg", "Description 10", "Bord", "Grå");
-const product11 = new Products("Product 11", 27.50, "image11.jpg", "Description 11", "stolar", "Rosa");
-const product12 = new Products("Product 12", 14.95, "image12.jpg", "Description 12", "soffor", "Cyan");
-const product13 = new Products("Product 13", 23.00, "image13.jpg", "Description 13", "bord", "Magenta");
-const product14 = new Products("Product 14", 31.20, "image14.jpg", "Description 14", "Stolar", "Lime");
-const product15 = new Products("Product 15", 16.75, "image15.jpg", "Description 15", "soffor", "Turquoise");
-const product16 = new Products("Product 16", 21.50, "image16.jpg", "Description 16", "Bord", "Guld");
-const product17 = new Products("Product 17", 28.99, "image17.jpg", "Description 17", "stolar", "Silver");
-const product18 = new Products("Product 18", 13.45, "image18.jpg", "Description 18", "soffor", "Bronze");
-const product19 = new Products("Product 19", 32.80, "image19.jpg", "Description 19", "bord", "Platinum");
-const product20 = new Products("Product 20", 17.25, "image20.jpg", "Description 20", "stolar", "Ruby");
+const product1 = new Products("Fåtölj", 20.99, "https://i.imgur.com/Xh1jbqe.png", "Brun stol trä", "Stolar", "Röd");
+const product2 = new Products("Stor ottoman", 30.49, "https://i.imgur.com/DlYgzC6.png", "Modern brun träd stol", "Stolar", "Blå");
+const product3 = new Products("Kontinentalsäng", 15.75, "https://i.imgur.com/K00Kozt.png", "Lyxig trä stol", "Stolar", "Grön");
+const product4 = new Products("Tv-bänk", 25.00, "https://i.imgur.com/tmetJY1.png", "Lyxig svart trä stol", "Stolar", "Gul");
+const product5 = new Products("Product 5", 18.50, "https://i.imgur.com/Z1KGkvL.png", "Description 5", "Stolar", "Lila");
+const product6 = new Products("Product 6", 22.99, "https://i.imgur.com/gQfVqiJ.png", "Description 6", "Soffor", "Orange");
+const product7 = new Products("Product 7", 29.95, "https://i.imgur.com/SKstywQ.png", "Description 7", "Soffor", "Svart");
+const product8 = new Products("Product 8", 12.80, "https://i.imgur.com/Txp0v1I.jpg", "Description 8", "Soffor", "Vit");
+const product9 = new Products("Product 9", 35.25, "https://i.imgur.com/FdyNuIT.jpg", "Description 9", "Soffor", "Brun");
+const product10 = new Products("Product 10", 19.99, "https://i.imgur.com/FGydSor.jpg", "Description 10", "Soffor", "Grå");
+// const product11 = new Products("Product 11", 27.50, "https://i.imgur.com/Cw4H6Ep.png", "Description 11", "Bord", "Rosa");
+// const product12 = new Products("Product 12", 14.95, "https://i.imgur.com/0oz7OrW.jpg", "Description 12", "Bord", "Cyan");
+// const product13 = new Products("Product 13", 23.00, "https://i.imgur.com/QGxc8QF.jpg", "Description 13", "Bord", "Magenta");
+// const product14 = new Products("Product 14", 31.20, "https://i.imgur.com/c4ACTev.jpg", "Description 14", "Bord", "Lime");
+// const product15 = new Products("Product 15", 16.75, "https://i.imgur.com/mAhn51f.jpg", "Description 15", "Bord", "Turquoise");
+// const product16 = new Products("Product 16", 21.50, "https://i.imgur.com/fOC7U9k.png", "Description 16", "Sängar", "Guld");
+// const product17 = new Products("Product 17", 28.99, "https://i.imgur.com/AI3tx7c.png", "Description 17", "Sängar", "Silver");
+// const product18 = new Products("Product 18", 13.45, "https://i.imgur.com/i2o6DOJ.png", "Description 18", "Sängar", "Bronze");
+// const product19 = new Products("Product 19", 32.80, "https://i.imgur.com/5nQHJ9O.png", "Description 19", "Sängar", "Platinum");
+// const product20 = new Products("Product 20", 17.25, "https://i.imgur.com/BXbg11X.png", "Description 20", "Sängar", "Ruby");
 
 const productsArray: Products[] = [
     product1, product2, product3, product4, product5,
     product6, product7, product8, product9, product10,
-    product11, product12, product13, product14, product15,
-    product16, product17, product18, product19, product20
+    // product11, product12, product13, product14, product15,
+    // product16, product17, product18, product19, product20
 ];
 
 const productsContainer = document.getElementById("app");
 
 for (let i = 0; i < productsArray.length; i++) {
+  const productCard= document.createElement("div");
+  productCard.className= "product-card"
   const img = document.createElement("img");
   img.src = productsArray[i].image;
-  productsContainer?.appendChild(img);
+  img.className = "produkt-card__img";
+  const productPrice= document.createElement("p");
+  productPrice.className="product-card__price"
+  productPrice.innerHTML=productsArray[i].price + " kr";
+  
+  
+  const productName= document.createElement("h3");
+  productName.className="product-card__title";
+  productName.innerHTML=productsArray[i].title;
+  productCard?.appendChild(img);
+  productCard?.appendChild(productName);
+  productCard?.appendChild(productPrice);
+  productsContainer?.appendChild(productCard);
+
 
 }
