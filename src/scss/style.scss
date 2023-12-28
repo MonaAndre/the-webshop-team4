@@ -11,6 +11,7 @@ ul,
   @include box-sixing;
 }
 body {
+  overflow-x: hidden;
   margin: 0;
   font-family: $font-text;
   h1,
@@ -123,11 +124,11 @@ header {
     padding: 0;
     height: 100vh;
 
-    li:nth-child(5) {
+    li:nth-child(2) {
       position: relative;
       top: 25%;
     }
-    li:nth-child(6) {
+    li:nth-child(2) {
       position: relative;
       top: 25%;
     }
@@ -155,7 +156,7 @@ header {
 .banner {
   width: 100vw;
   top: 80px;
-  position: absolute;
+  position: relative;
   color: #fff;
   background-color: #303031; //REPLACE WITH VARIABLE
   padding: 10px;
@@ -257,13 +258,12 @@ main {
 }
 
 
-.produkt-card__img {
-  width: 100%;
-}
+// .produkt-card__img {
+//   width: 100%;
+// }
 
 
 #app{
-margin-top: 12rem;
 display: flex;
 flex-direction: row;
 flex-wrap: wrap;
@@ -271,17 +271,44 @@ gap: 3%;
 align-items: center;
 justify-content: center;
 .product-card{
-  border: 1px solid $primary-black;
+  box-shadow: 0 5px 5px -3px rgba($color: #000000, $alpha: 0.3);
   border-radius: 10px;
   padding: 10px;
-  margin-bottom:10px ;
+  margin-bottom: 10px;
   width: 45%;
   overflow: hidden;
-  &__img{
-    width: 100%;
-    height: 30%;
-    object-fit: cover;
-    
+  height: 320px;
+  &__button {
+  background-color: $accent-sec;
+  color: white;
+  border: none;
+  font-weight: 500;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  border-radius: 8px;
+  padding: 0.2rem 0.5rem;
+}
+&__button:hover{
+background-color: $primary-black;
+color: $primary-white;
+}
+&__button:active{
+  background-color: $accent-first ;
+}
+  &__img-container{
+    max-width: 100%;
+    height: 60%;
+    margin-bottom: 10px;
+    overflow: hidden;
+    object-fit: center;
   }
+
 }
 }
+.produkt-card__img{
+  width: 100%;
+  height: 100%;
+  object-fit: center;
+}
+
