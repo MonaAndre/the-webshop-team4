@@ -119,16 +119,20 @@ header {
   padding-top: 120px;
   transition: 0.4s;
 
-  ul {
+  .mainHamUl {
     list-style: none;
     padding: 0;
     height: 100vh;
 
-    li:nth-child(2) {
+    li:first-child {
+      font-weight: bold;
+    }
+
+    li:nth-child(6) {
       position: relative;
       top: 25%;
     }
-    li:nth-child(2) {
+    li:nth-child(7) {
       position: relative;
       top: 25%;
     }
@@ -257,58 +261,54 @@ main {
   color: black;
 }
 
-
 // .produkt-card__img {
 //   width: 100%;
 // }
 
-
-#app{
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-gap: 3%;
-align-items: center;
-justify-content: center;
-.product-card{
-  box-shadow: 0 5px 5px -3px rgba($color: #000000, $alpha: 0.3);
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 45%;
-  overflow: hidden;
-  height: 320px;
-  &__button {
-  background-color: $accent-sec;
-  color: white;
-  border: none;
-  font-weight: 500;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  border-radius: 8px;
-  padding: 0.2rem 0.5rem;
-}
-&__button:hover{
-background-color: $primary-black;
-color: $primary-white;
-}
-&__button:active{
-  background-color: $accent-first ;
-}
-  &__img-container{
-    max-width: 100%;
-    height: 60%;
+#app {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 3%;
+  align-items: center;
+  justify-content: center;
+  .product-card {
+    box-shadow: 0 5px 5px -3px rgba($color: #000000, $alpha: 0.3);
+    border-radius: 10px;
+    padding: 10px;
     margin-bottom: 10px;
+    width: 45%;
     overflow: hidden;
-    object-fit: center;
+    height: 320px;
+    &__button {
+      background-color: $accent-sec;
+      color: white;
+      border: none;
+      font-weight: 500;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      border-radius: 8px;
+      padding: 0.2rem 0.5rem;
+    }
+    &__button:hover {
+      background-color: $primary-black;
+      color: $primary-white;
+    }
+    &__button:active {
+      background-color: $accent-first;
+    }
+    &__img-container {
+      max-width: 100%;
+      height: 60%;
+      margin-bottom: 10px;
+      overflow: hidden;
+      object-fit: center;
+    }
   }
-
 }
-}
-.produkt-card__img{
+.produkt-card__img {
   width: 100%;
   height: 100%;
   object-fit: center;
 }
-
