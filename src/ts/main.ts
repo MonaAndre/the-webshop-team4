@@ -48,10 +48,11 @@ const productsArray: Products[] = [
 ];
 
 const productsContainer = document.getElementById("app");
+const modal = document.getElementById("content-information");
 
 for (let i = 0; i < productsArray.length; i++) {
   const productCard= document.createElement("div");
-  productCard.className= "product-card"
+  productCard.className= "product-card";
   const img = document.createElement("img");
   const imgContainer = document.createElement("div");
   imgContainer.className="product-card__img-container";
@@ -70,13 +71,44 @@ for (let i = 0; i < productsArray.length; i++) {
   productCard?.appendChild(productName);
   productCard?.appendChild(productPrice);
   productsContainer?.appendChild(productCard);
+  
+  
+  productCard.addEventListener("click",() => {
+    modal?.classList.remove("modalHidden");
+    const modalTitle = document.createElement("h3");
+    const modalImage = document.createElement("img");
+    const modalImgContainer = document.createElement("div");
+    const modalPrice = document.createElement("p");
+    const modalDescription = document.createElement ("p");
 
-  const addBtn= document.createElement("button");
-  addBtn.innerHTML = '<i class="bi bi-cart-plus"></i> Add Product';
-  addBtn.className = "product-card__button";
-  productCard.appendChild(addBtn);
+    modalTitle.innerHTML = productsArray[i].title;
+    modalPrice.innerHTML = productsArray[i].price.toString() + "kr";
+    modalDescription.innerHTML = productsArray[i].description;
+    modalImage.src = productsArray[i].image;
+
+    modalImgContainer.appendChild(modalImage);
+    modal?.appendChild(modalImgContainer);
+    modal?.appendChild(modalTitle);
+    modal?.appendChild(modalPrice);
+    modal?.appendChild(modalDescription);
+  
+
+
+    modalTitle.className = "modal-card__title";
+    modalImage.className = "modal-card__image";
+    modalImgContainer.className = "modal-card__img-container";
+    modalPrice.className = "modal-card_price";
+    modalDescription.className = "modal-card_description";
+
+    const addBtn= document.createElement("button");
+    addBtn.innerHTML = '<i class="bi bi-cart-plus"></i> Add Product';
+    addBtn.className = "modal-card__button";
+    modal?.appendChild(addBtn);
+
+    // const closeBtn= document.querySelectorAll(".btn-close");
+    
+  })
+ 
   
 }
 
-// const addBtn= document.querySelectorAll(".product-card__button") as HTMLButtonElement;
-// addBtn?.addEventListener("click" addProductToBasket);
