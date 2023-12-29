@@ -1,5 +1,6 @@
 import "./../scss/style.scss";
 import { Products } from "./models/products";
+import { updateModalContent } from "./modalcreator.ts";
 
 //----------------Hamburger Menu Functions-----------------------
 const menuBtn = document.querySelector(".hamburger") as HTMLButtonElement;
@@ -47,57 +48,17 @@ const productsArray: Products[] = [
     product16, product17, product18, product19, product20
 ];
 
-const productsContainer = document.getElementById("app");
-const modal = document.getElementById("content-information") as HTMLDivElement;
+//Create basket array
+const basketProductsArray: [] = [];
 
-
-function updateModalContent(product: Products) {
-  modal?.classList.remove("modalHidden");
-
-  //Create html for Modal
-  const modalTitle = document.createElement("h3");
-  const modalImage = document.createElement("img");
-  const modalImgContainer = document.createElement("div");
-  const modalPrice = document.createElement("p");
-  const modalDescription = document.createElement("p");
-  const modalColor = document.createElement("h4");
-  const modalCloseBtn = document.createElement("button");
-
-  //Apply content in Modal elements
-  modalTitle.innerHTML = product.title;
-  modalPrice.innerHTML = product.price.toString() + " kr";
-  modalDescription.innerHTML = product.description;
-  modalImage.src = product.image;
-  modalColor.innerHTML = "color:" + product.color;
-  modalCloseBtn.innerHTML=`<i class="bi bi-x"></i>`;
-  modalCloseBtn.className="btn-close";
-
-  modalImgContainer.appendChild(modalImage);
+//A function to fill the basket
+// export const addProductToBasket = () => {
   
+//   console.log();
+// }
 
-  modal.innerHTML = "";
-  modal?.appendChild(modalCloseBtn);
-  modal?.appendChild(modalImgContainer);
-  modal?.appendChild(modalTitle);
-  modal?.appendChild(modalPrice);
-  modal?.appendChild(modalDescription);
-  modal?.appendChild(modalColor);
 
-  modalTitle.className = "modal-card__title";
-  modalImage.className = "modal-card__image";
-  modalImgContainer.className = "modal-card__img-container";
-  modalPrice.className = "modal-card_price";
-  modalDescription.className = "modal-card_description";
-
-  const addBtn = document.createElement("button");
-  addBtn.innerHTML = '<i class="bi bi-cart-plus"></i> Add Product';
-  addBtn.className = "modal-card__button";
-  modal?.appendChild(addBtn);
-
-  modalCloseBtn.addEventListener("click", () => {
-    modal?.classList.add("modalHidden");
-  });
-}
+const productsContainer = document.getElementById("app");
 
 for (let i = 0; i < productsArray.length; i++) {
   const productCard = document.createElement("div");
@@ -123,3 +84,101 @@ for (let i = 0; i < productsArray.length; i++) {
     updateModalContent(productsArray[i]);
   });
 }
+
+// if id_product === id_click {get information}
+
+
+/*const renderList = () => {
+  //Hämta ul-taggen som listan ska visas i
+  const ul = document.getElementById("todo");
+  ul.innerHTML = "";
+
+  //Loopa igenom listan todoList
+  todoList.forEach((toDo, i) => {
+    //Skapa element för egenskaperna i objektet Task
+    const li = document.createElement("li");
+    const task = document.createElement("span");
+    const room = document.createElement("span");
+    const time = document.createElement("span");
+    const button = document.createElement("button");
+
+    //lägga till innehåll i elementen från objektet Task
+    task.innerHTML = toDo.task;
+    room.innerHTML = toDo.room;
+    time.innerHTML = toDo.aproxTime;
+    button.innerHTML = "Mark as done";
+
+    //Lägga till css klasser
+    li.className = "li";
+    button.className = "btn li__button";
+    task.className = "li__task";
+    room.className = "li__room";
+    time.className = "li__time";
+
+    //Lyssnar och agerar på det
+    button.addEventListener("click", (e) => {
+      toDo.done = true;
+      doneList.push(toDo);
+      todoList.splice(i, 1);
+      renderList();
+      renderDoneList();
+    });
+
+    //Placera
+    li.appendChild(task);
+    li.appendChild(room);
+    li.appendChild(time);
+    li.appendChild(button);
+    ul.appendChild(li);
+  });
+  //Kolla att det funkar som det ska
+  console.log(todoList);
+  console.log(doneList);
+};
+
+const renderDoneList = () => {
+  //Hämta ul taggen som listan kommer visas i
+  const doneUl = document.getElementById("done");
+  doneUl.innerHTML = "";
+
+  doneList.forEach((taskDone, i) => {
+    //Skapa element för varje del i listan doneList
+    const doneLi = document.createElement("li");
+    const doneTask = document.createElement("span");
+    const doneRoom = document.createElement("span");
+    const doneTime = document.createElement("span");
+    const doneButton = document.createElement("button");
+
+    //Fyller i elementen
+    doneTask.innerHTML = taskDone.task;
+    doneRoom.innerHTML = taskDone.room;
+    doneTime.innerHTML = taskDone.aproxTime;
+    doneButton.innerHTML = "Mark as not done";
+
+    //Lägga till css klasser
+    doneLi.className = "li";
+    doneButton.className = "btn li__button";
+    doneTask.className = "li__task";
+    doneRoom.className = "li__room";
+    doneTime.className = "li__time";
+
+    //lyssna efter click och agera därefter
+    doneButton.addEventListener("click", (e) => {
+      todoList.push(taskDone);
+      doneList.splice(i, 1);
+      renderList();
+      renderDoneList();
+    });
+
+    //Placerar allt
+    doneLi.appendChild(doneTask);
+    doneLi.appendChild(doneRoom);
+    doneLi.appendChild(doneTime);
+    doneLi.appendChild(doneButton);
+    doneUl.appendChild(doneLi);
+  });
+  console.log(todoList);
+  console.log(doneList);
+};
+
+renderList();*/
