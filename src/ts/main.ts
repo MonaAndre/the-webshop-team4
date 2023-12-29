@@ -48,67 +48,78 @@ const productsArray: Products[] = [
 ];
 
 const productsContainer = document.getElementById("app");
-const modal = document.getElementById("content-information");
+const modal = document.getElementById("content-information") as HTMLDivElement;
+
+
+function updateModalContent(product: Products) {
+  modal?.classList.remove("modalHidden");
+
+  //Create html for Modal
+  const modalTitle = document.createElement("h3");
+  const modalImage = document.createElement("img");
+  const modalImgContainer = document.createElement("div");
+  const modalPrice = document.createElement("p");
+  const modalDescription = document.createElement("p");
+  const modalColor = document.createElement("h4");
+  const modalCloseBtn = document.createElement("button");
+
+  //Apply content in Modal elements
+  modalTitle.innerHTML = product.title;
+  modalPrice.innerHTML = product.price.toString() + " kr";
+  modalDescription.innerHTML = product.description;
+  modalImage.src = product.image;
+  modalColor.innerHTML = "color:" + product.color;
+  modalCloseBtn.innerHTML=`<i class="bi bi-x"></i>`;
+  modalCloseBtn.className="btn-close";
+
+  modalImgContainer.appendChild(modalImage);
+  
+
+  modal.innerHTML = "";
+  modal?.appendChild(modalCloseBtn);
+  modal?.appendChild(modalImgContainer);
+  modal?.appendChild(modalTitle);
+  modal?.appendChild(modalPrice);
+  modal?.appendChild(modalDescription);
+  modal?.appendChild(modalColor);
+
+  modalTitle.className = "modal-card__title";
+  modalImage.className = "modal-card__image";
+  modalImgContainer.className = "modal-card__img-container";
+  modalPrice.className = "modal-card_price";
+  modalDescription.className = "modal-card_description";
+
+  const addBtn = document.createElement("button");
+  addBtn.innerHTML = '<i class="bi bi-cart-plus"></i> Add Product';
+  addBtn.className = "modal-card__button";
+  modal?.appendChild(addBtn);
+
+  modalCloseBtn.addEventListener("click", () => {
+    modal?.classList.add("modalHidden");
+  });
+}
 
 for (let i = 0; i < productsArray.length; i++) {
-  const productCard= document.createElement("div");
-  productCard.className= "product-card";
+  const productCard = document.createElement("div");
+  productCard.className = "product-card";
   const img = document.createElement("img");
   const imgContainer = document.createElement("div");
-  imgContainer.className="product-card__img-container";
+  imgContainer.className = "product-card__img-container";
   imgContainer.appendChild(img);
   img.src = productsArray[i].image;
   img.className = "produkt-card__img";
-  const productPrice= document.createElement("p");
-  productPrice.className="product-card__price"
-  productPrice.innerHTML=productsArray[i].price + " kr";
-  
-  
-  const productName= document.createElement("h3");
-  productName.className="product-card__title";
-  productName.innerHTML=productsArray[i].title;
+  const productPrice = document.createElement("p");
+  productPrice.className = "product-card__price"
+  productPrice.innerHTML = productsArray[i].price + " kr";
+  const productName = document.createElement("h3");
+  productName.className = "product-card__title";
+  productName.innerHTML = productsArray[i].title;
   productCard?.appendChild(imgContainer);
   productCard?.appendChild(productName);
   productCard?.appendChild(productPrice);
   productsContainer?.appendChild(productCard);
-  
-  
-  productCard.addEventListener("click",() => {
-    modal?.classList.remove("modalHidden");
-    const modalTitle = document.createElement("h3");
-    const modalImage = document.createElement("img");
-    const modalImgContainer = document.createElement("div");
-    const modalPrice = document.createElement("p");
-    const modalDescription = document.createElement ("p");
 
-    modalTitle.innerHTML = productsArray[i].title;
-    modalPrice.innerHTML = productsArray[i].price.toString() + "kr";
-    modalDescription.innerHTML = productsArray[i].description;
-    modalImage.src = productsArray[i].image;
-
-    modalImgContainer.appendChild(modalImage);
-    modal?.appendChild(modalImgContainer);
-    modal?.appendChild(modalTitle);
-    modal?.appendChild(modalPrice);
-    modal?.appendChild(modalDescription);
-  
-
-
-    modalTitle.className = "modal-card__title";
-    modalImage.className = "modal-card__image";
-    modalImgContainer.className = "modal-card__img-container";
-    modalPrice.className = "modal-card_price";
-    modalDescription.className = "modal-card_description";
-
-    const addBtn= document.createElement("button");
-    addBtn.innerHTML = '<i class="bi bi-cart-plus"></i> Add Product';
-    addBtn.className = "modal-card__button";
-    modal?.appendChild(addBtn);
-
-    // const closeBtn= document.querySelectorAll(".btn-close");
-    
-  })
- 
-  
+  productCard.addEventListener("click", () => {
+    updateModalContent(productsArray[i]);
+  });
 }
-

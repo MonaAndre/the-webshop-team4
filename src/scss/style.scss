@@ -246,7 +246,7 @@ main {
   padding: 1rem;
   margin: 0.5rem;
   text-align: center;
-  background-color: beige;
+  background-color: $accent-first;
   border-radius: 3px;
 }
 
@@ -366,9 +366,9 @@ main {
   
   }
   &__title {
-    margin-left: 10%;
+    margin-left: 5%;
   }
   &__categories {
-    margin-left: 10%;
+    margin-left: 5%;
   }
 }
