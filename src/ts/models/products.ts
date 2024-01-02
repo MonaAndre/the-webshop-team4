@@ -1,17 +1,28 @@
 export class Products {
-    title: string;
-    price: number;
-    image: string;
-    description: string;
-    category: string;
-    color: string;
+  id: number;
+  title: string;
+  price: number;
+  image: string;
+  description: string;
+  category: string;
+  color: string;
+  quantity: number = 0;
 
-    constructor(title:string, price: number, image:string, description:string, category:string, color:string) {
-        this.title = title;
-        this.price = price;
-        this.image = image;
-        this.description = description;
-        this.category = category;
-        this.color = color;
-    }
+  constructor(
+    id: number,
+    title: string,
+    price: number,
+    image: string,
+    description: string,
+    category: string,
+    color: string
+  ) {
+    this.id = id;
+    this.title = title;
+    this.price = price;
+    this.image = image;
+    this.description = description;
+    this.category = category;
+    this.color = color;
+  }
 }
