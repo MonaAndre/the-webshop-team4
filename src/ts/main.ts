@@ -6,7 +6,7 @@ import { updateModalContent } from "./modalcreator.ts";
 const menuBtn = document.querySelector(".hamburger") as HTMLButtonElement;
 const hamburgerNav = document.querySelector(".hamburgerNav") as HTMLElement;
 const banner = document.querySelector(".banner") as HTMLElement;
-const basketContainer = document.getElementById("appBasket");
+const basketContainer = document.getElementById("appBasket") as HTMLDivElement;
 //Add a listener to listen after click on hamburger menu icon
 menuBtn.addEventListener("click", () => {
   menuBtn.classList.toggle("isActive");
@@ -228,31 +228,101 @@ const productsArray: Products[] = [
 //Create basket array
 let basket: Products[] = JSON.parse(localStorage.getItem("shoppingCart") ?? "[]");
 console.log(basket);
-const productsContainer = document.getElementById("app");
+const productsContainer = document.getElementById("app") as HTMLDivElement;
 
+
+
+const renderBasket = () => {
+  basketContainer.innerHTML = "";
 for (let i = 0; i < basket.length; i++) {
+  // create basket elements
   const basketProductContainer = document.createElement("div");
   const basketProductTitle = document.createElement("p");
   const basketProductPrice = document.createElement("p");
   const basketImgContainer = document.createElement("div");
   const basketImg = document.createElement("img");
   const basketProductQuanitity = document.createElement("p");
+  const basketRemoveButton = document.createElement("button");
+  const addQuantityButton = document.createElement("button");
+  const decreaseQuantityButton = document.createElement("button");
   
+  //Add Classnames
+  basketProductTitle.className = "basket__title";
+  basketProductPrice.className = "basket__price";
+  basketImg.className = "basket__img";
+  basketImgContainer.className = "basket__img-container";
+  basketProductQuanitity.className = "basket__quantity";
+
+  
+  // add content to basket elements
   basketProductPrice.innerHTML = basket[i].price.toString();
   basketProductTitle.innerHTML = basket[i].title;
   basketProductQuanitity.innerHTML  = basket[i].quantity.toString();
   basketImg.src = basket[i].image;
+  basketRemoveButton.innerHTML = "X";
+  addQuantityButton.innerHTML= "+";
+  decreaseQuantityButton.innerHTML= "-";
 
 
-  
+  // Appended basket elements to html
   basketImg.appendChild(basketImgContainer);
-  basketProductContainer.appendChild(basketContainer);
-  basketProductContainer.appendChild(basketProductQuanitity);
-  basketProductContainer.appendChild(basketProductPrice);
+  basketProductContainer.appendChild(basketImg);
   basketProductContainer.appendChild(basketProductTitle);
+  basketProductContainer.appendChild(decreaseQuantityButton);
+  basketProductContainer.appendChild(basketProductQuanitity);
+  basketProductContainer.appendChild(addQuantityButton);
+  basketProductContainer.appendChild(basketProductPrice);
+  basketProductContainer.appendChild(basketRemoveButton);
+  
   basketContainer?.appendChild(basketProductContainer);
   
+  addQuantityButton.addEventListener("click", () => {
+    basket[i].quantity++;
+    updateShoppingCart();
+    renderBasket()
+  })
+
+  decreaseQuantityButton.addEventListener("click", ()=> {
+    basket[i].quantity--;
+    updateShoppingCart();
+    renderBasket()
+  })
+
+  basketRemoveButton.addEventListener("click", () => {
+    const productid = basket[i].id;
+    
+    basket[i].isAddedToCart = false;
+    basket.splice(i, 1);
+    updateShoppingCart();
+    renderBasket();
+  })
+  
+
+  if (basket[i].quantity < 1) {
+    basket.splice(i, 1);
+    updateShoppingCart();
+    renderBasket();
+  }
 }
+
+let totalPrice = 0;
+for (let i=0; i < basket.length; i++){
+  totalPrice += basket[i].price * basket[i].quantity;
+}
+console.log("Totalprice:", totalPrice);
+
+if(totalPrice === 0){
+  const totalPricePharagraph = document.createElement("p");
+  basketContainer?.appendChild(totalPricePharagraph);
+  totalPricePharagraph.innerHTML="Your Shopping cart is empty";
+}else{
+  const totalPricePharagraph= document.createElement("p");
+  basketContainer?.appendChild(totalPricePharagraph);
+  totalPricePharagraph.innerHTML="Total price: "+ totalPrice + " kr";
+}
+}
+
+
 
 //Create and show Products on page
 productsArray.forEach((product) => {
@@ -312,46 +382,6 @@ export function addToCartClicked(product: Products) {
 
 function updateShoppingCart() {
 localStorage.setItem('shoppingCart', JSON.stringify(basket)) //add cart to local storage
-
 }
-/*
-for (let i = 0; i < productsArray.length; i++) {
-  //Skapa Element
-  const productCard = document.createElement("div");
-  const img = document.createElement("img");
-  const imgContainer = document.createElement("div");
-  const productPrice = document.createElement("p");
-  const productName = document.createElement("h3");
-  const addBtn = document.createElement("button");
 
-  //Lägg till klassnamn
-  productCard.className = "product-card";
-  imgContainer.className = "product-card__img-container";
-  img.className = "product-card__img";
-  productPrice.className = "product-card__price";
-  productName.className = "product-card__title";
-  addBtn.className = "modal-card__button";
-
-  //Lägg till Innehåll
-  productName.innerHTML = productsArray[i].title;
-  img.src = productsArray[i].image;
-  productPrice.innerHTML = productsArray[i].price + " kr";
-
-  imgContainer.appendChild(img);
-  productCard?.appendChild(imgContainer);
-  productCard?.appendChild(productName);
-  productCard?.appendChild(productPrice);
-  productsContainer?.appendChild(productCard);
-  addBtn.innerHTML = '<i class="bi bi-cart-plus"></i> Add Product';
-
-  productCard.addEventListener("click", () => {
-    updateModalContent(productsArray[i]);
-  });
-
-  addBtn.addEventListener("click", () => {
-    basket.push();
-  });
-}
-*/
-
-
+renderBasket();
