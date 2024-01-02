@@ -226,103 +226,101 @@ const productsArray: Products[] = [
 ];
 
 //Create basket array
-let basket: Products[] = JSON.parse(localStorage.getItem("shoppingCart") ?? "[]");
+let basket: Products[] = JSON.parse(
+  localStorage.getItem("shoppingCart") ?? "[]"
+);
 console.log(basket);
 const productsContainer = document.getElementById("app") as HTMLDivElement;
 
-
-
 const renderBasket = () => {
   basketContainer.innerHTML = "";
-for (let i = 0; i < basket.length; i++) {
-  // create basket elements
-  const basketProductContainer = document.createElement("div");
-  const basketProductTitle = document.createElement("p");
-  const basketProductPrice = document.createElement("p");
-  const basketImgContainer = document.createElement("div");
-  const basketImg = document.createElement("img");
-  const basketProductQuanitity = document.createElement("p");
-  const basketRemoveButton = document.createElement("button");
-  const addQuantityButton = document.createElement("button");
-  const decreaseQuantityButton = document.createElement("button");
-  
-  //Add Classnames
-  basketProductTitle.className = "basket__title";
-  basketProductPrice.className = "basket__price";
-  basketImg.className = "basket__img";
-  basketImgContainer.className = "basket__img-container";
-  basketProductQuanitity.className = "basket__quantity";
+  for (let i = 0; i < basket.length; i++) {
+    // create basket elements
+    const basketProductContainer = document.createElement("div");
+    const basketProductTitle = document.createElement("p");
+    const basketProductPrice = document.createElement("p");
+    const basketImgContainer = document.createElement("div");
+    const basketImg = document.createElement("img");
+    const basketProductQuanitity = document.createElement("p");
+    const basketRemoveButton = document.createElement("button");
+    const addQuantityButton = document.createElement("button");
+    const decreaseQuantityButton = document.createElement("button");
 
-  
-  // add content to basket elements
-  basketProductPrice.innerHTML = basket[i].price.toString();
-  basketProductTitle.innerHTML = basket[i].title;
-  basketProductQuanitity.innerHTML  = basket[i].quantity.toString();
-  basketImg.src = basket[i].image;
-  basketRemoveButton.innerHTML = "X";
-  addQuantityButton.innerHTML= "+";
-  decreaseQuantityButton.innerHTML= "-";
+    //Add Classnames
+    basketProductTitle.className = "basket__title";
+    basketProductPrice.className = "basket__price";
+    basketImg.className = "basket__img";
+    basketImgContainer.className = "basket__img-container";
+    basketProductQuanitity.className = "basket__quantity";
 
+    // add content to basket elements
+    basketProductPrice.innerHTML = basket[i].price.toString();
+    basketProductTitle.innerHTML = basket[i].title;
+    basketProductQuanitity.innerHTML = basket[i].quantity.toString();
+    basketImg.src = basket[i].image;
+    basketRemoveButton.innerHTML = "X";
+    addQuantityButton.innerHTML = "+";
+    decreaseQuantityButton.innerHTML = "-";
 
-  // Appended basket elements to html
-  basketImg.appendChild(basketImgContainer);
-  basketProductContainer.appendChild(basketImg);
-  basketProductContainer.appendChild(basketProductTitle);
-  basketProductContainer.appendChild(decreaseQuantityButton);
-  basketProductContainer.appendChild(basketProductQuanitity);
-  basketProductContainer.appendChild(addQuantityButton);
-  basketProductContainer.appendChild(basketProductPrice);
-  basketProductContainer.appendChild(basketRemoveButton);
-  
-  basketContainer?.appendChild(basketProductContainer);
-  
-  addQuantityButton.addEventListener("click", () => {
-    basket[i].quantity++;
-    updateShoppingCart();
-    renderBasket()
-  })
+    // Appended basket elements to html
+    basketImg.appendChild(basketImgContainer);
+    basketProductContainer.appendChild(basketImg);
+    basketProductContainer.appendChild(basketProductTitle);
+    basketProductContainer.appendChild(decreaseQuantityButton);
+    basketProductContainer.appendChild(basketProductQuanitity);
+    basketProductContainer.appendChild(addQuantityButton);
+    basketProductContainer.appendChild(basketProductPrice);
+    basketProductContainer.appendChild(basketRemoveButton);
 
-  decreaseQuantityButton.addEventListener("click", ()=> {
-    basket[i].quantity--;
-    updateShoppingCart();
-    renderBasket()
-  })
+    basketContainer?.appendChild(basketProductContainer);
 
-  basketRemoveButton.addEventListener("click", () => {
-    const productid = basket[i].id;
-    
-    basket[i].isAddedToCart = false;
-    basket.splice(i, 1);
-    updateShoppingCart();
-    renderBasket();
-  })
-  
+    addQuantityButton.addEventListener("click", () => {
+      basket[i].quantity++;
+      updateShoppingCart();
+      renderBasket();
+    });
 
-  if (basket[i].quantity < 1) {
-    basket.splice(i, 1);
-    updateShoppingCart();
-    renderBasket();
+    decreaseQuantityButton.addEventListener("click", () => {
+      basket[i].quantity--;
+      updateShoppingCart();
+      renderBasket();
+    });
+
+    console.log(productsArray);
+    basketRemoveButton.addEventListener("click", () => {
+      const productId = productsArray.findIndex(
+        (prod) => prod.id === basket[i].id
+      );
+      productsArray[productId].isAddedToCart = false;
+      basket.splice(i, 1);
+      console.log(productsArray);
+      updateShoppingCart();
+      renderBasket();
+    });
+
+    if (basket[i].quantity < 1) {
+      basket.splice(i, 1);
+      updateShoppingCart();
+      renderBasket();
+    }
   }
-}
 
-let totalPrice = 0;
-for (let i=0; i < basket.length; i++){
-  totalPrice += basket[i].price * basket[i].quantity;
-}
-console.log("Totalprice:", totalPrice);
+  let totalPrice = 0;
+  for (let i = 0; i < basket.length; i++) {
+    totalPrice += basket[i].price * basket[i].quantity;
+  }
+  console.log("Totalprice:", totalPrice);
 
-if(totalPrice === 0){
-  const totalPricePharagraph = document.createElement("p");
-  basketContainer?.appendChild(totalPricePharagraph);
-  totalPricePharagraph.innerHTML="Your Shopping cart is empty";
-}else{
-  const totalPricePharagraph= document.createElement("p");
-  basketContainer?.appendChild(totalPricePharagraph);
-  totalPricePharagraph.innerHTML="Total price: "+ totalPrice + " kr";
-}
-}
-
-
+  if (totalPrice === 0) {
+    const totalPricePharagraph = document.createElement("p");
+    basketContainer?.appendChild(totalPricePharagraph);
+    totalPricePharagraph.innerHTML = "Your Shopping cart is empty";
+  } else {
+    const totalPricePharagraph = document.createElement("p");
+    basketContainer?.appendChild(totalPricePharagraph);
+    totalPricePharagraph.innerHTML = "Total price: " + totalPrice + " kr";
+  }
+};
 
 //Create and show Products on page
 productsArray.forEach((product) => {
@@ -360,7 +358,7 @@ productsArray.forEach((product) => {
   productCard.addEventListener("click", () => {
     updateModalContent(product);
   });
-  
+
   //Listen for click on "add to cart"
   addBtn.addEventListener("click", () => {
     addToCartClicked(product);
@@ -368,20 +366,25 @@ productsArray.forEach((product) => {
 });
 export function addToCartClicked(product: Products) {
   //Check if it's already in the cart
-  if (product.isAddedToCart === true ) {
+  if (product.isAddedToCart === true) {
     product.quantity++; //Add quantity
-  }
-  else {
+    const productId = productsArray.findIndex((prod) => prod.id === product.id);
+    productsArray[productId].isAddedToCart = true; //this ensure that isAddedToCart is still true.
+    updateShoppingCart();
+  } else {
     basket.push(product); //If not in cart, push it to cart
     product.quantity++; //add 1 quantity of it
-    product.isAddedToCart = true; //change it to showcase it's in cart
+    const productID = productsArray.findIndex((prod) => prod.id === product.id);
+    productsArray[productID].isAddedToCart = true; //change it to showcase it's in cart
   }
-  updateShoppingCart(); //Update cart
+  updateShoppingCart();
   console.log(basket);
+  console.log(productsArray);
 }
 
+console.log(productsArray);
 function updateShoppingCart() {
-localStorage.setItem('shoppingCart', JSON.stringify(basket)) //add cart to local storage
+  localStorage.setItem("shoppingCart", JSON.stringify(basket)); //add cart to local storage
 }
 
 renderBasket();
