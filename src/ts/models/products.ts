@@ -6,7 +6,7 @@ export class Products {
   description: string;
   category: string;
   color: string;
-  quantity: number = 0;
+  quantity: number = 1;
   isAddedToCart: boolean = false;
 
   constructor(

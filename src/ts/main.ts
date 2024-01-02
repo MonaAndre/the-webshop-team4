@@ -288,10 +288,6 @@ const renderBasket = () => {
 
     console.log(productsArray);
     basketRemoveButton.addEventListener("click", () => {
-      const productId = productsArray.findIndex(
-        (prod) => prod.id === basket[i].id
-      );
-      productsArray[productId].isAddedToCart = false;
       basket.splice(i, 1);
       console.log(productsArray);
       updateShoppingCart();
@@ -364,25 +360,26 @@ productsArray.forEach((product) => {
     addToCartClicked(product);
   });
 });
+
 export function addToCartClicked(product: Products) {
-  //Check if it's already in the cart
-  if (product.isAddedToCart === true) {
-    product.quantity++; //Add quantity
-    const productId = productsArray.findIndex((prod) => prod.id === product.id);
-    productsArray[productId].isAddedToCart = true; //this ensure that isAddedToCart is still true.
-    updateShoppingCart();
+  if (basket.length == 0) {
+    //if the length of the array is 0, add product to array
+    basket.push(product);
   } else {
-    basket.push(product); //If not in cart, push it to cart
-    product.quantity++; //add 1 quantity of it
-    const productID = productsArray.findIndex((prod) => prod.id === product.id);
-    productsArray[productID].isAddedToCart = true; //change it to showcase it's in cart
+    let checkIndex = basket.findIndex((prod) => prod.id === product.id); //search if there is already an item with the same id
+
+    if (checkIndex === -1) {
+      // if checkIndex becomes -1 (when findIndex couldn't find an index which container the same id as product.id)
+      basket.push(product);
+    } else {
+      // Products already in local storage, increase quantity
+      basket[checkIndex].quantity = basket[checkIndex].quantity + 1;
+    }
   }
-  updateShoppingCart();
+  updateShoppingCart(); //uppdatera localstorage
   console.log(basket);
-  console.log(productsArray);
 }
 
-console.log(productsArray);
 function updateShoppingCart() {
   localStorage.setItem("shoppingCart", JSON.stringify(basket)); //add cart to local storage
 }
