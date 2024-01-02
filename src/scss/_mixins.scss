@@ -5,6 +5,12 @@
 }
 
 //Breakpoints
+@mixin mini-tablet{
+  @media screen and (min-width: 500px) {
+    @content;
+  }
+}
+
 @mixin tablet {
   @media screen and (min-width: 769px) {
     @content;

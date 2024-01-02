@@ -6,6 +6,7 @@ import { updateModalContent } from "./modalcreator.ts";
 const menuBtn = document.querySelector(".hamburger") as HTMLButtonElement;
 const hamburgerNav = document.querySelector(".hamburgerNav") as HTMLElement;
 const banner = document.querySelector(".banner") as HTMLElement;
+const basketContainer = document.getElementById("appBasket");
 //Add a listener to listen after click on hamburger menu icon
 menuBtn.addEventListener("click", () => {
   menuBtn.classList.toggle("isActive");
@@ -225,12 +226,37 @@ const productsArray: Products[] = [
 ];
 
 //Create basket array
-const basket: Products[] = [];
-
+let basket: Products[] = JSON.parse(localStorage.getItem("shoppingCart") ?? "[]");
+console.log(basket);
 const productsContainer = document.getElementById("app");
 
+for (let i = 0; i < basket.length; i++) {
+  const basketProductContainer = document.createElement("div");
+  const basketProductTitle = document.createElement("p");
+  const basketProductPrice = document.createElement("p");
+  const basketImgContainer = document.createElement("div");
+  const basketImg = document.createElement("img");
+  const basketProductQuanitity = document.createElement("p");
+  
+  basketProductPrice.innerHTML = basket[i].price.toString();
+  basketProductTitle.innerHTML = basket[i].title;
+  basketProductQuanitity.innerHTML  = basket[i].quantity.toString();
+  basketImg.src = basket[i].image;
+
+
+  
+  basketImg.appendChild(basketImgContainer);
+  basketProductContainer.appendChild(basketContainer);
+  basketProductContainer.appendChild(basketProductQuanitity);
+  basketProductContainer.appendChild(basketProductPrice);
+  basketProductContainer.appendChild(basketProductTitle);
+  basketContainer?.appendChild(basketProductContainer);
+  
+}
+
+//Create and show Products on page
 productsArray.forEach((product) => {
-  //Skapa Element
+  //Create Element
   const productCard = document.createElement("div");
   const img = document.createElement("img");
   const imgContainer = document.createElement("div");
@@ -238,20 +264,21 @@ productsArray.forEach((product) => {
   const productName = document.createElement("h3");
   const addBtn = document.createElement("button");
 
-  //Lägg till klassnamn
+  //Add ClassName
   productCard.className = "product-card";
   imgContainer.className = "product-card__img-container";
-  img.className = "produkt-card__img";
+  img.className = "product-card__img";
   productPrice.className = "product-card__price";
   productName.className = "product-card__title";
   addBtn.className = "product-card__button";
 
-  //Lägg till Innehåll
+  //Add content
   productName.innerHTML = product.title;
   img.src = product.image;
   productPrice.innerHTML = product.price + " kr";
   addBtn.innerHTML = '<i class="bi bi-cart-plus"></i> Add Product';
 
+  //Place it on page
   imgContainer.appendChild(img);
   productCard?.appendChild(imgContainer);
   productCard?.appendChild(productName);
@@ -259,18 +286,33 @@ productsArray.forEach((product) => {
   productCard?.appendChild(addBtn);
   productsContainer?.appendChild(productCard);
 
+  //Listen for click to show product information
   productCard.addEventListener("click", () => {
     updateModalContent(product);
   });
-
+  
+  //Listen for click on "add to cart"
   addBtn.addEventListener("click", () => {
     addToCartClicked(product);
   });
 });
 export function addToCartClicked(product: Products) {
-  basket.push(product);
+  //Check if it's already in the cart
+  if (product.isAddedToCart === true ) {
+    product.quantity++; //Add quantity
+  }
+  else {
+    basket.push(product); //If not in cart, push it to cart
+    product.quantity++; //add 1 quantity of it
+    product.isAddedToCart = true; //change it to showcase it's in cart
+  }
+  updateShoppingCart(); //Update cart
   console.log(basket);
-  product.quantity++;
+}
+
+function updateShoppingCart() {
+localStorage.setItem('shoppingCart', JSON.stringify(basket)) //add cart to local storage
+
 }
 /*
 for (let i = 0; i < productsArray.length; i++) {
@@ -285,7 +327,7 @@ for (let i = 0; i < productsArray.length; i++) {
   //Lägg till klassnamn
   productCard.className = "product-card";
   imgContainer.className = "product-card__img-container";
-  img.className = "produkt-card__img";
+  img.className = "product-card__img";
   productPrice.className = "product-card__price";
   productName.className = "product-card__title";
   addBtn.className = "modal-card__button";
@@ -310,110 +352,6 @@ for (let i = 0; i < productsArray.length; i++) {
     basket.push();
   });
 }
-
-// if id_product === id_click {get information}
 */
-/*
 
 
-function addItemToCart(itemTitle, itemPrice, itemImage){
- const cartRow = document.createElement("div");
-}
-
-
-
-
-const renderList = () => {
-  //Hämta ul-taggen som listan ska visas i
-  const ul = document.getElementById("todo");
-  ul.innerHTML = "";
-
-  //Loopa igenom listan todoList
-  todoList.forEach((toDo, i) => {
-    //Skapa element för egenskaperna i objektet Task
-    const li = document.createElement("li");
-    const task = document.createElement("span");
-    const room = document.createElement("span");
-    const time = document.createElement("span");
-    const button = document.createElement("button");
-
-    //lägga till innehåll i elementen från objektet Task
-    task.innerHTML = toDo.task;
-    room.innerHTML = toDo.room;
-    time.innerHTML = toDo.aproxTime;
-    button.innerHTML = "Mark as done";
-
-    //Lägga till css klasser
-    li.className = "li";
-    button.className = "btn li__button";
-    task.className = "li__task";
-    room.className = "li__room";
-    time.className = "li__time";
-
-    //Lyssnar och agerar på det
-    button.addEventListener("click", (e) => {
-      toDo.done = true;
-      doneList.push(toDo);
-      todoList.splice(i, 1);
-      renderList();
-      renderDoneList();
-    });
-
-    //Placera
-    li.appendChild(task);
-    li.appendChild(room);
-    li.appendChild(time);
-    li.appendChild(button);
-    ul.appendChild(li);
-  });
-  //Kolla att det funkar som det ska
-  console.log(todoList);
-  console.log(doneList);
-};
-
-const renderDoneList = () => {
-  //Hämta ul taggen som listan kommer visas i
-  const doneUl = document.getElementById("done");
-  doneUl.innerHTML = "";
-
-  doneList.forEach((taskDone, i) => {
-    //Skapa element för varje del i listan doneList
-    const doneLi = document.createElement("li");
-    const doneTask = document.createElement("span");
-    const doneRoom = document.createElement("span");
-    const doneTime = document.createElement("span");
-    const doneButton = document.createElement("button");
-
-    //Fyller i elementen
-    doneTask.innerHTML = taskDone.task;
-    doneRoom.innerHTML = taskDone.room;
-    doneTime.innerHTML = taskDone.aproxTime;
-    doneButton.innerHTML = "Mark as not done";
-
-    //Lägga till css klasser
-    doneLi.className = "li";
-    doneButton.className = "btn li__button";
-    doneTask.className = "li__task";
-    doneRoom.className = "li__room";
-    doneTime.className = "li__time";
-
-    //lyssna efter click och agera därefter
-    doneButton.addEventListener("click", (e) => {
-      todoList.push(taskDone);
-      doneList.splice(i, 1);
-      renderList();
-      renderDoneList();
-    });
-
-    //Placerar allt
-    doneLi.appendChild(doneTask);
-    doneLi.appendChild(doneRoom);
-    doneLi.appendChild(doneTime);
-    doneLi.appendChild(doneButton);
-    doneUl.appendChild(doneLi);
-  });
-  console.log(todoList);
-  console.log(doneList);
-};
-
-renderList();*/

@@ -7,6 +7,7 @@ export class Products {
   category: string;
   color: string;
   quantity: number = 0;
+  isAddedToCart: boolean = false;
 
   constructor(
     id: number,

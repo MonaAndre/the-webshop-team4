@@ -47,8 +47,9 @@ export function updateModalContent(product: Products) {
   addBtn.innerHTML = '<i class="bi bi-cart-plus"></i> Add Product';
   addBtn.className = "modal-card__button";
   modal?.appendChild(addBtn);
-  addBtn.addEventListener("click", (event) => {
-    addToCartClicked(event);
+  
+  addBtn.addEventListener("click", () => {
+    addToCartClicked(product);
   });
 
   modalCloseBtn.addEventListener("click", () => {
