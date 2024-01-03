@@ -6,6 +6,7 @@ import { updateModalContent } from "./modalcreator.ts";
 const menuBtn = document.querySelector(".hamburger") as HTMLButtonElement;
 const hamburgerNav = document.querySelector(".hamburgerNav") as HTMLElement;
 const banner = document.querySelector(".banner") as HTMLElement;
+const checkoutButton = document.getElementById("checkout") as HTMLButtonElement;
 
 //Add a listener to listen after click on hamburger menu icon
 menuBtn.addEventListener("click", () => {
@@ -225,13 +226,13 @@ const productsArray: Products[] = [
   product20,
 ];
 
-
 //Create basket array
 let basket: Products[] = JSON.parse(
   localStorage.getItem("shoppingCart") ?? "[]"
 );
-//console.log(basket);
 
+
+//------------------------------- BASKET -----------------------------
 //Create function to handle basket and it's HTML
 const renderBasket = () => {
   const basketContainer = document.getElementById("appBasket") as HTMLDivElement;
@@ -291,6 +292,11 @@ const renderBasket = () => {
     decreaseQuantityButton.addEventListener("click", () => {
       basket[i].quantity--;
       console.log(basket);
+      
+      if (basket[i].quantity < 1) {
+      basket.splice(i, 1);
+      console.log(basket);
+      }
       updateShoppingCart();
       renderBasket();
       
@@ -304,13 +310,7 @@ const renderBasket = () => {
       
     });
 
-    if (basket[i].quantity < 1) {
-      basket.splice(i, 1);
-      console.log(basket);
-      updateShoppingCart();
-      renderBasket();
-      
-    }
+    
   }
   
    // Show the total price of products in the shopping cart
@@ -353,7 +353,7 @@ let totalPrice = 0;
 }*/
 
 
-
+//----------------------------- PRODUCTS ------------------------
 //Create and show Products on page
 productsArray.forEach((product) => {
   const productsContainer = document.getElementById("app") as HTMLDivElement;
@@ -423,4 +423,21 @@ function updateShoppingCart() {
   localStorage.setItem("shoppingCart", JSON.stringify(basket)); //add cart to local storage
 }
 
+// checkoutButton.addEventListener("click", () => {
+//  handleCheckout();
+// });
+
+const handleCheckout = () => {
+  const hideMain = document.getElementById("checkoutMain") as HTMLElement;
+  hideMain.className = "hideCheckoutInfo";
+
+  const loader = document.createElement("div");
+  loader.className = "loader";
+
+  const orderConfirmation = document.createElement("div");
+}
+
+
 renderBasket();
+
+

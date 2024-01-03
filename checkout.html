@@ -7,7 +7,7 @@
       src="https://kit.fontawesome.com/ee781b796e.js"
       crossorigin="anonymous"
     ></script>
-    <title>Product information</title>
+    <title>Checkout</title>
   </head>
   <body>
     <header>
@@ -40,18 +40,85 @@
         <li><a href="#">Chairs</a></li>
         <li><a href="#">Couch</a></li>
         <li><a href="#">Beds</a></li>
-        <li><a href="basket.html">Basket</a></li>
+        <li><a href="#">Basket</a></li>
         <li><a href="">Sign in/Sign Up</a></li>
       </ul>
     </nav>
   </section>
 
-    <main class="marginmain">
-      <h1 class="h1-categories">Inredning</h1>
-      <div id="app"></div>
-      <aside id="content-information" class="modal modalHidden">
-        <button class="btn-close"><i class="fa-solid fa-x"></i></button>
-      </aside>
+    <main class="marginmain" id="checkoutMain">
+      <h1 class="h1-categories">Checkout</h1>
+      <div id="appBasket"></div> 
+
+    <section class="forms-section">
+         <form action="submit" class="form">
+        <h2 class="form-title">Shipping address</h2>
+        <div class="input-wrapper">
+          <label for="first-ame">First Name</label>
+        <input type="text" id="first-name" placeholder="Your first name" required>
+        </div>
+        
+        <div class="input-wrapper">
+        <label for="last-name">Last Name</label>
+        <input type="text" name="last-name" id="last-name" placeholder="Your last name" required>
+        </div>
+
+<div class="input-wrapper">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="emailadress" placeholder="Your email" required>
+</div>
+
+<div class="input-wrapper">
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" placeholder="Your city" required>
+</div>
+
+<div class="input-wrapper">
+        <label for="country">Country</label>
+        <input type="text" name="country" id="country">
+</div>
+
+<div class="input-wrapper">
+        <label for="zip-code">ZIP Code</label>
+        <input type="number" name="zip-code" id="zip-code" required placeholder="ZIP Code">
+</div>
+
+<div class="input-wrapper">
+        <label for="phone-number">Phone Number</label>
+        <input type="number" name="phone-number" id="phone-number">
+        </div>
+
+        <div class="input-wrapper">
+        <label for="billingaddress">Billing address is the same as shipping address?</label>
+        <input type="checkbox" name="billingaddress" id="billingaddress"></div>
+      </form>
+      
+      <form action="submit" class="form">
+        <h2 class="form-title">Card information</h2>
+        
+        <div class="input-wrapper">
+        <label for="card-name">Cardholder Name</label>
+        <input type="text" name="card-name" id="card-name">
+</div>
+
+<div class="input-wrapper">
+        <label for="card-number">Card Number</label>
+        <input type="number" name="card-number" id="card-number">
+</div>
+
+<div class="input-wrapper">
+        <label for="card-security">Security code</label>
+        <input type="password" name="card-security" id="card-security">
+</div>
+
+<div class="input-wrapper">
+        <label for="card-zip">Zip code</label>
+        <input type="text" name="card-zip" id="card-zip">
+      </div>
+      </form>
+    </section>
+   
+      <button id="checkout">Complete order</button>
     </main>
 
     <footer class="footer">

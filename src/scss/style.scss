@@ -389,15 +389,7 @@ min-height: 55vh;
   gap: 5px;
 }
 .modal-card__button{
-  background-color: $accent-sec;
-  color: white;
-  border: none;
-  font-weight: 500;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  display: block;
-  border-radius: 8px;
+  @include btn-style;
   padding: 0.2rem 0.5rem;
 }
 .modal-card__image{
@@ -419,7 +411,17 @@ min-height: 55vh;
 //   display: flex;
 //   flex-direction: column;
 // }
-//.basket-product__container{}
+.basket-product__container{
+  display: flex;
+  flex-direction: row;
+  button{
+   width: 50px;
+  }
+  @include tablet{
+  
+  }
+ 
+}
 
 // .basket__title{
 
@@ -450,3 +452,58 @@ footer{
   width: 100vw;
 }
 
+.forms-section{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+ 
+  
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.input-wrapper{
+  display: flex;
+  flex-direction: column;
+}
+
+#checkout {
+  @include btn-style;
+  padding: 0.7rem 1.1rem;
+  margin-bottom: 1rem;
+}
+
+a{
+  text-decoration: none;
+  color: $primary-white;
+}
+#basket__button {
+  @include btn-style;
+  padding: 0.7rem 1.1rem;
+}
+
+//------------------------ PROCESSING CHECKOUT -----------------
+.hideCheckoutInfo {
+  display: none;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid $accent-first; 
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
