@@ -33,7 +33,7 @@ a {
   text-decoration: none;
 }
 
-//----------------Header Styling--------------------
+//------------------------ HEADER STYLING ------------------------
 header {
   position: fixed;
   top: 0;
@@ -51,7 +51,24 @@ header {
     outline: none;
     border: none;
     font-size: 28px;
-    margin: 0 20px;
+    margin: 0 35px;
+
+    .noticeOnCart {
+      padding-top: 2px;
+      margin: 0;
+      position: absolute;
+      top: 40px;
+      right: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(219, 87, 87);
+      color: $primary-white;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      font-size: 0.9rem;
+    }
 
     i {
       color: $accent-first;
@@ -68,7 +85,7 @@ header {
     }
   }
 }
-//-------------------Hamburger icon styling-------------------
+//------------------------ HAMBURGER ICON STYLING ------------------------
 .hamburger {
   position: relative;
 
@@ -106,7 +123,7 @@ header {
   }
 }
 
-//-----------------Hamburger Navigation Styling----------------
+//------------------------ HAMBURGER NAVIGATION STYLING ------------------------
 .hamburgerNav {
   position: fixed;
   top: 0;
@@ -137,13 +154,14 @@ header {
       top: 10%;
     }
   }
+
   a {
     display: block;
     width: 100%;
     max-width: 200px;
     margin: 0 auto 16px;
     padding: 12px 16px;
-    background-color: $accent-first; 
+    background-color: $accent-first;
     color: $primary-white;
     text-decoration: none;
 
@@ -156,7 +174,7 @@ header {
     left: 0;
   }
 }
-//---------------- Banner Styling -----------
+//------------------------ BANNER STYLING ------------------------
 .banner {
   width: 100vw;
   top: 80px;
@@ -164,71 +182,46 @@ header {
   color: #fff;
   background-color: $primary-black;
   padding: 10px;
+
   div {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     margin-right: 10px;
+
     i {
       margin: 0 5px 0 8px;
     }
+
     p {
       margin: 0;
     }
   }
+
   &#isActive {
     z-index: -1;
   }
 }
 
-//--------------------- Footer Styling --------------------- 
-.footer {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  z-index: 97;
-  a {
-    color: $primary-white;
-    transition: all 0.3s ease;
-  }
-  a:hover {
-    color: $accent-sec;
-  }
-  .help {
-    &__title {
-      font-family: $font-rubric;
-    }
-  }
-  .nav {
-    width: 100%;
-    .nav-list {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-    }
-  }
-  background-color: $primary-black;
-  color: $primary-white;
-  padding: 20px;
-  .contacts {
-    &__list {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-    }
+//------------------------ FRONTPAGE STYLING ------------------------
+main {
+  min-height: 55vh;
+  @include tablet {
+    min-height: 65vh;
   }
 }
 
-main {
-min-height: 55vh;
-@include tablet{
-  min-height: 65vh;
-}
-}
 .marginmain {
   margin-top: 100px;
   max-width: 100vw;
+}
+
+.hero {
+  width: 100vw;
+  height: 60vh;
+  background-image: url(https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1258&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-position: center;
+  background-size: cover;
 }
 
 .image {
@@ -270,7 +263,7 @@ min-height: 55vh;
 .li-categories a:active {
   color: black;
 }
-
+// ------------------------ PRODUCT STYLING ------------------------
 #app {
   display: flex;
   flex-direction: row;
@@ -278,6 +271,7 @@ min-height: 55vh;
   gap: 3%;
   align-items: center;
   justify-content: center;
+
   .product-card {
     box-shadow: 0 5px 5px -3px rgba($color: #000000, $alpha: 0.3);
     border-radius: 10px;
@@ -286,15 +280,19 @@ min-height: 55vh;
     width: 45%;
     overflow: hidden;
     height: 350px;
-    @include mini-tablet{
+
+    @include mini-tablet {
       width: 30%;
     }
-    @include tablet{
+
+    @include tablet {
       width: 25%;
     }
-    @include desktop{
+
+    @include desktop {
       width: 20%;
     }
+
     &__button {
       background-color: $accent-sec;
       color: white;
@@ -306,13 +304,16 @@ min-height: 55vh;
       border-radius: 8px;
       padding: 0.2rem 0.5rem;
     }
+
     &__button:hover {
       background-color: $primary-black;
       color: $primary-white;
     }
+
     &__button:active {
       background-color: $accent-first;
     }
+
     &__img-container {
       max-width: 100%;
       height: 60%;
@@ -323,13 +324,14 @@ min-height: 55vh;
     }
   }
 }
+
 .product-card__img {
   width: 100%;
   height: 100%;
   object-fit: center;
 }
 
-//------------------MODAL STYLING----------------
+//------------------------ MODAL STYLING ------------------------
 .modal {
   display: block; /* Hidden by default */
   position: fixed; /* Stay in place */
@@ -340,10 +342,10 @@ min-height: 55vh;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgb(255, 255, 255); 
-  @include tablet{
-   
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgb(255, 255, 255);
+
+  @include tablet {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -352,14 +354,14 @@ min-height: 55vh;
     font-size: 30px;
     height: 100vh;
     overflow-y: hidden;
-    }
-  
+  }
 }
+
 .modalHidden {
   display: none;
 }
 
-.closeButton{
+.closeButton {
   width: 24px;
   height: 24px;
   position: fixed;
@@ -376,134 +378,212 @@ min-height: 55vh;
   }
 }
 
-// .modal-card{
-//   @include tablet{
-//    display: flex;
-//    flex-direction: row;
-//    align-items: center;
-//    }
-// }
-.modal-card__text{
+.modal-card__text {
   display: flex;
   flex-direction: column;
   margin-left: 10vw;
   gap: 5px;
 }
-.modal-card__button{
+
+.modal-card__button {
   @include btn-style;
   padding: 0.2rem 0.5rem;
   display: block;
 }
 
-.modal-card__image{
-   width: 100vw;
-   max-height: 40vh;
-   @include tablet{
+.modal-card__image {
+  width: 100vw;
+  max-height: 40vh;
+
+  @include tablet {
     width: 40vw;
     max-height: 80vh;
-    //min-height: 50vh;
-   }
+  }
 }
 
 .modal-card__title {
   margin-top: 5%;
-  //margin-left: 5%;
 }
 
 .modal-card__categories {
   margin-left: 5%;
 }
 
-// #appBasket{
-//   display: flex;
-//   flex-direction: column;
-// }
-
-.total-price{
+//------------------------ BASKET STYLING ------------------------
+.total-price {
   text-align: center;
-
 }
-.basket-product__container{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+
+.basket__productContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "Img Img Title Title Title Title Title"
+    "Img Img decrease quantity increase price removeButton";
   margin-bottom: 20px;
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   padding: 3px;
-  @include tablet{
-   max-width: 500px;
-   margin: 0 auto;
+
+  @include mini-tablet {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 0.5fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "Img Img Title Title Title Title Title ."
+      "Img Img decrease quantity increase price removeButton .";
   }
+
+  @include tablet {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
+
   button {
-    height: 2rem;
-    width: 2rem;
     border-radius: 50%;
-    
     margin: 5px;
   }
-  .basket__title{
-    margin-left: 5%;
-    
-  }
-  .basket__price {
-    width: 50px;
-    margin-left: 3%;
-  }
-  //.basket__img-container{}
 
-  .basket__img{
+  .basket__title {
+    grid-area: Title;
+    display: inline-block;
+    margin-left: 5%;
+    @include tablet {
+      margin: 8px 8px 8px 30px;
+      flex-grow: 2;
+    }
+  }
+
+  .basket__quantity {
+    margin: 8px;
+    grid-area: quantity;
+    text-align: center;
+    align-self: center;
+  }
+
+  .basket__price {
+    grid-area: price;
+    display: inline-block;
+    width: 50px;
+    justify-self: end;
+    align-self: end;
+
+    @include tablet {
+      justify-self: center;
+      align-self: center;
+      text-align: center;
+      margin: 8px;
+    }
+  }
+
+  .basket__img {
+    grid-area: Img;
+    align-self: center;
+    justify-self: end;
     width: 100px;
-    
-     }
+  }
+
   .basketRemove {
-    color: red;
-    font-size: large;
+    grid-area: removeButton;
+    justify-self: center;
+    display: inline-block;
+    color: rgb(202, 66, 66);
+    font-size: 28px;
     margin-left: 3%;
     border: none;
     background-color: rgba(0, 0, 0, 0);
+    text-align: right;
+
+    &:hover {
+      color: rgb(255, 56, 56);
+    }
+
+    @include tablet {
+      justify-self: center;
+    }
   }
-  .basketIncreaseQuantity{
-    color: black;
+
+  .basketIncreaseQuantity {
+    align-self: start;
+    grid-area: increase;
+    display: inline-block;
+    appearance: none;
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 28px;
+    color: $accent-first;
+    text-align: left;
+
+    &:hover {
+      color: rgb(154, 147, 230);
+    }
+
+    @include tablet {
+      align-self: center;
+      justify-self: right;
+    }
   }
+
   .basketDecreaseQuantity {
-  color: black;
-  margin-left: 8%;
- }
+    align-self: start;
+    grid-area: decrease;
+    display: inline-block;
+    appearance: none;
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 28px;
+    color: rgb(152, 150, 183);
+    margin-left: 8%;
+    text-align: right;
+
+    &:hover {
+      color: rgb(158, 153, 224);
+    }
+
+    @include tablet {
+      align-self: center;
+    }
+  }
 }
 
-.hero{
-  width: 100vw;
-  height: 60vh;
-  background-image: url(https://images.unsplash.com/photo-1586023492125-27b2c045efd7?q=80&w=1258&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
-  background-position: center;
-  background-size: cover;
-}
-
-footer{
-  position: relative;
-  bottom: 0;
-  width: 100vw;
-}
-
-.forms-section{
+//------------------------ CHECKOUT STYLING ------------------------
+.forms-section {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  column-gap: 10px;
 }
 
-.form{
+.form {
   display: flex;
   flex-direction: column;
   min-width: 300px;
   margin: 0 auto;
   gap: 20px;
+
+  @include mini-tablet {
+    margin: 0 5%;
+  }
 }
 
-.input-wrapper{
+.input-wrapper {
   display: flex;
   flex-direction: column;
+}
+
+#flexCheckChecked {
+  margin-bottom: 25px;
+  &:checked {
+    border-color: $accent-first;
+    background-color: $accent-first;
+  }
 }
 
 #checkout {
@@ -513,7 +593,7 @@ footer{
   display: block;
 }
 
-a{
+a {
   text-decoration: none;
   color: $primary-white;
 }
@@ -523,14 +603,18 @@ a{
   margin-bottom: 1rem;
 }
 
-//------------------------ PROCESSING CHECKOUT -----------------
+//------------------------ PROCESSING CHECKOUT ------------------------
 .hideCheckoutInfo {
+  display: none;
+}
+.noticeHidden {
   display: none;
 }
 
 .orderConfirmContainer {
   display: block;
-  margin: 0 auto;
+  margin: 0 5px;
+  text-align: center;
 
   .orderNumber {
     color: $primary-black;
@@ -540,7 +624,7 @@ a{
     color: $primary-black;
   }
 
-  .thanksOrder{
+  .thanksOrder {
     font-size: 3rem;
     color: $primary-black;
   }
@@ -549,9 +633,10 @@ a{
     color: $primary-black;
   }
 
-  .checkmark {
-    background-color: #34b232;
-    
+  .checkmarkOrder {
+    margin-top: 40px;
+    color: #34b232;
+    font-size: xx-large;
   }
 }
 
@@ -561,21 +646,82 @@ a{
 }
 
 @keyframes animateOC {
-  from{ bottom:-100px; opacity: 0 }
-  to{ bottom:0; opacity:1 }
+  from {
+    bottom: -100px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
 }
 
-.orderHidden{
+.orderHidden {
   display: none;
+}
+
+.spinnerContainer {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
 }
 
 .loader {
   display: none;
 }
 
-.toStart-btn{
+.toStart-btn {
   @include btn-style;
   display: block;
-  margin: 0 auto;
- padding:10px;
+  margin: 80px auto;
+  padding: 10px;
+}
+
+//------------------------ FOOTER STYLING ------------------------
+footer {
+  position: relative;
+  bottom: 0;
+  width: 100vw;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  z-index: 97;
+  background-color: $primary-black;
+  color: $primary-white;
+  padding: 20px;
+
+  a {
+    color: $primary-white;
+    transition: all 0.3s ease;
+  }
+
+  a:hover {
+    color: $accent-sec;
+  }
+
+  .help__title {
+    font-family: $font-rubric;
+  }
+
+  .nav {
+    width: 100%;
+    .nav-list {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
+  }
+
+  .contacts {
+    &__list {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+  }
 }

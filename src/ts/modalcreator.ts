@@ -22,15 +22,15 @@ export function updateModalContent(product: Products) {
 
   //Apply content in Modal elements
   modalTitle.innerHTML = product.title;
-  modalPrice.innerHTML = "Price: "+product.price.toString() + " kr";
-  modalDescription.innerHTML = "Description: "+product.description;
+  modalPrice.innerHTML = "Price: " + product.price.toString() + " kr";
+  modalDescription.innerHTML = "Description: " + product.description;
   modalImage.src = product.image;
   modalColor.innerHTML = "Color: " + product.color;
   modalCloseBtn.innerHTML = `<i class="bi bi-x-circle-fill"></i>`;
   modalImgContainer.appendChild(modalImage);
 
   modal.innerHTML = "";
-  
+
   modal?.appendChild(modalCloseBtn);
   modal?.appendChild(modalImgContainer);
   modal?.appendChild(modalTextContainer);
@@ -44,13 +44,13 @@ export function updateModalContent(product: Products) {
   modalImgContainer.className = "modal-card__img-container";
   modalPrice.className = "modal-card_price";
   modalDescription.className = "modal-card_description";
-  modalTextContainer.className="modal-card__text";
+  modalTextContainer.className = "modal-card__text";
 
   const addBtn = document.createElement("button");
   addBtn.innerHTML = '<i class="bi bi-cart-plus"></i> Add Product';
   addBtn.className = "modal-card__button";
   modal?.appendChild(addBtn);
-  
+
   addBtn.addEventListener("click", () => {
     addToCartClicked(product);
   });

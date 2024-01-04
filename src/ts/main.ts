@@ -3,7 +3,6 @@ import { Products } from "./models/products";
 import { updateModalContent } from "./modalcreator.ts";
 import { updateCheckoutContent } from "./checkcreator.ts";
 
-
 //----------------Hamburger Menu Functions-----------------------
 const menuBtn = document.querySelector(".hamburger") as HTMLButtonElement;
 const hamburgerNav = document.querySelector(".hamburgerNav") as HTMLElement;
@@ -236,10 +235,17 @@ const basketContainer = document.getElementById("appBasket") as HTMLDivElement;
 //------------------------------- BASKET -----------------------------
 //Create function to handle basket and it's HTML
 const renderBasket = () => {
-  if(basketContainer!==null){
-  basketContainer.innerHTML = "";
+  if (basketContainer !== null) {
+    basketContainer.innerHTML = "";
   }
+  let totalQuantity = 0;
   for (let i = 0; i < basket.length; i++) {
+    totalQuantity += basket[i].quantity;
+    const noticeOnCart = document.getElementById(
+      "noticeOnCart"
+    ) as HTMLParagraphElement;
+    noticeOnCart.innerHTML = totalQuantity.toString();
+
     // create basket elements
     const basketProductContainer = document.createElement("div");
     const basketProductTitle = document.createElement("p");
@@ -252,7 +258,7 @@ const renderBasket = () => {
     const decreaseQuantityButton = document.createElement("button");
 
     //Add Classnames
-    basketProductContainer.className="basket-product__container";
+    basketProductContainer.className = "basket__productContainer";
     basketProductTitle.className = "basket__title";
     basketProductPrice.className = "basket__price";
     basketImg.className = "basket__img";
@@ -262,15 +268,16 @@ const renderBasket = () => {
     increaseQuantityButton.className = "basketIncreaseQuantity";
     decreaseQuantityButton.className = "basketDecreaseQuantity";
 
-
     // Add content to basket elements
-    basketProductPrice.innerHTML = basket[i].price.toString()+ " kr";
+    basketProductPrice.innerHTML = basket[i].price.toString() + " kr";
     basketProductTitle.innerHTML = basket[i].title;
     basketProductQuanitity.innerHTML = basket[i].quantity.toString();
     basketImg.src = basket[i].image;
     basketRemoveButton.innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
-    increaseQuantityButton.innerHTML = "+";
-    decreaseQuantityButton.innerHTML = "-";
+    increaseQuantityButton.innerHTML =
+      '<i class="fa-solid fa-circle-plus"></i>';
+    decreaseQuantityButton.innerHTML =
+      '<i class="fa-solid fa-circle-minus"></i>';
 
     // Appended basket elements to html
     basketImg.appendChild(basketImgContainer);
@@ -284,13 +291,11 @@ const renderBasket = () => {
 
     basketContainer?.appendChild(basketProductContainer);
 
-    
     //When user increase quantity
     increaseQuantityButton.addEventListener("click", () => {
       basket[i].quantity++;
       updateShoppingCart();
       renderBasket();
-  
     });
     //When user decrease quantity
     decreaseQuantityButton.addEventListener("click", () => {
@@ -298,25 +303,24 @@ const renderBasket = () => {
       console.log(basket);
       //Checks if quantity is 0 and if it is remove product from basket
       if (basket[i].quantity < 1) {
-      basket.splice(i, 1);
-      console.log(basket);
+        basket.splice(i, 1);
+        console.log(basket);
       }
       updateShoppingCart();
       renderBasket();
-      
     });
 
-    //When user clicks on the remov button
+    //When user clicks on the remove button
     basketRemoveButton.addEventListener("click", () => {
       basket.splice(i, 1);
       updateShoppingCart();
       renderBasket();
-      
     });
   }
-  
-   // Show the total price of products in the shopping cart
-let totalPrice = 0;
+
+  // Show the total price of products in the shopping cart
+
+  let totalPrice = 0;
   for (let i = 0; i < basket.length; i++) {
     totalPrice += basket[i].price * basket[i].quantity;
   }
@@ -325,25 +329,28 @@ let totalPrice = 0;
   if (totalPrice === 0) {
     const totalPricePharagraph = document.createElement("h3");
     basketContainer?.appendChild(totalPricePharagraph);
-    totalPricePharagraph.className="total-price";
+    totalPricePharagraph.className = "total-price";
     totalPricePharagraph.innerHTML = "Your Shopping cart is empty";
     //renderBasket();
   } else {
     const totalPricePharagraph = document.createElement("h3");
     basketContainer?.appendChild(totalPricePharagraph);
-    totalPricePharagraph.className="total-price";
+    totalPricePharagraph.className = "total-price";
     totalPricePharagraph.innerHTML = "Total price: " + totalPrice + " kr";
   }
+
   //Make Checkout button active if there is products in basket
-  const basketBtn= document.getElementById("basket__button")as HTMLButtonElement;
+  const basketBtn = document.getElementById(
+    "basket__button"
+  ) as HTMLButtonElement;
   if (basketBtn) {
     if (basket.length > 0) {
-    basketBtn.style.display = "block";
+      basketBtn.style.display = "block";
     } else {
-    basketBtn.style.display = "none";
+      basketBtn.style.display = "none";
     }
-  updateShoppingCart();
-}
+    updateShoppingCart();
+  }
 };
 
 //----------------------------- PRODUCTS ------------------------
@@ -407,6 +414,7 @@ export function addToCartClicked(product: Products) {
     }
   }
   updateShoppingCart(); //Update localStorage
+  renderBasket();
   console.log(basket);
 }
 
@@ -414,29 +422,25 @@ function updateShoppingCart() {
   localStorage.setItem("shoppingCart", JSON.stringify(basket)); //add cart to localStorage
 }
 
-
 //------------------------------------ HANDLE CHECKOUT -----------------------------
 const checkoutButton = document.getElementById("checkout") as HTMLButtonElement;
 checkoutButton?.addEventListener("click", () => {
-  spinnerLoad()
-  basket = [];
-  updateShoppingCart();
+  spinnerLoad();
 });
 
 function spinnerLoad() {
-  const hideMain = document.getElementById("checkoutMain") as HTMLElement; //Hämtar main där 
+  basket = [];
+  updateShoppingCart();
+  const hideMain = document.getElementById("checkoutMain") as HTMLElement; //Hämtar main där
   hideMain.className = "hideCheckoutInfo";
 
   const checkoutModal = document.getElementById(
     "checkout-information"
   ) as HTMLDivElement;
   checkoutModal.classList.toggle("modalHidden"); //Hides checkout informtion
-  
-  
-  let setTimer:any; 
+
+  let setTimer: any;
   setTimer = setTimeout(updateCheckoutContent, 3000); //Show orderconfirmation after 3 seconds, updateCheckoutcontent is the function handling orderconfirmation conten
 }
 
-renderBasket();//Update basket
-
-
+renderBasket(); //Update basket

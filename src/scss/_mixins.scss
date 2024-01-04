@@ -5,7 +5,7 @@
 }
 
 //Breakpoints
-@mixin mini-tablet{
+@mixin mini-tablet {
   @media screen and (min-width: 500px) {
     @content;
   }
@@ -23,8 +23,7 @@
   }
 }
 
-
-@mixin btn-style{
+@mixin btn-style {
   background-color: $accent-sec;
   color: white;
   border: none;
