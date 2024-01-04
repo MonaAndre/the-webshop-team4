@@ -18,6 +18,7 @@ export function updateModalContent(product: Products) {
   const modalColor = document.createElement("h4");
   const modalCloseBtn = document.createElement("button");
   const modalTextContainer = document.createElement("div");
+  modalCloseBtn.className = "closeButton";
 
   //Apply content in Modal elements
   modalTitle.innerHTML = product.title;
@@ -25,9 +26,7 @@ export function updateModalContent(product: Products) {
   modalDescription.innerHTML = "Description: "+product.description;
   modalImage.src = product.image;
   modalColor.innerHTML = "Color: " + product.color;
-  modalCloseBtn.innerHTML = `<i class="bi bi-x"></i>`;
-  modalCloseBtn.className = "btn-close";
-
+  modalCloseBtn.innerHTML = `<i class="bi bi-x-circle-fill"></i>`;
   modalImgContainer.appendChild(modalImage);
 
   modal.innerHTML = "";
@@ -50,7 +49,7 @@ export function updateModalContent(product: Products) {
   const addBtn = document.createElement("button");
   addBtn.innerHTML = '<i class="bi bi-cart-plus"></i> Add Product';
   addBtn.className = "modal-card__button";
-  modalTextContainer?.appendChild(addBtn);
+  modal?.appendChild(addBtn);
   
   addBtn.addEventListener("click", () => {
     addToCartClicked(product);
