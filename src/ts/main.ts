@@ -241,10 +241,11 @@ const renderBasket = () => {
   let totalQuantity = 0;
   for (let i = 0; i < basket.length; i++) {
     totalQuantity += basket[i].quantity;
-    const noticeOnCart = document.getElementById(
-      "noticeOnCart"
-    ) as HTMLParagraphElement;
-    noticeOnCart.innerHTML = totalQuantity.toString();
+    const noticeOnCart = document.getElementById("noticeOnCart") as HTMLParagraphElement;
+   
+    if(noticeOnCart){
+       noticeOnCart.innerHTML = totalQuantity.toString();
+    }
 
     // create basket elements
     const basketProductContainer = document.createElement("div");
