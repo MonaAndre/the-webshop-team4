@@ -241,10 +241,12 @@ const renderBasket = () => {
   let totalQuantity = 0;
   for (let i = 0; i < basket.length; i++) {
     totalQuantity += basket[i].quantity;
-    const noticeOnCart = document.getElementById("noticeOnCart") as HTMLParagraphElement;
-   
-    if(noticeOnCart){
-       noticeOnCart.innerHTML = totalQuantity.toString();
+    const noticeOnCart = document.getElementById(
+      "noticeOnCart"
+    ) as HTMLParagraphElement;
+
+    if (noticeOnCart) {
+      noticeOnCart.innerHTML = totalQuantity.toString();
     }
 
     // create basket elements
@@ -301,11 +303,10 @@ const renderBasket = () => {
     //When user decrease quantity
     decreaseQuantityButton.addEventListener("click", () => {
       basket[i].quantity--;
-      console.log(basket);
+
       //Checks if quantity is 0 and if it is remove product from basket
       if (basket[i].quantity < 1) {
         basket.splice(i, 1);
-        console.log(basket);
       }
       updateShoppingCart();
       renderBasket();
@@ -325,7 +326,6 @@ const renderBasket = () => {
   for (let i = 0; i < basket.length; i++) {
     totalPrice += basket[i].price * basket[i].quantity;
   }
-  console.log("Totalprice:", totalPrice);
 
   if (totalPrice === 0) {
     const totalPricePharagraph = document.createElement("h3");
@@ -416,7 +416,6 @@ export function addToCartClicked(product: Products) {
   }
   updateShoppingCart(); //Update localStorage
   renderBasket();
-  console.log(basket);
 }
 
 function updateShoppingCart() {

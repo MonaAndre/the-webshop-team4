@@ -32,9 +32,6 @@ export function updateCheckoutContent() {
   emailSent.className = "emailSent";
   checkmark.className = "checkmarkOrder";
 
-  console.log(orderNumber);
-  console.log(orderDate);
-
   spinner.classList.toggle("loader");
   orderConfirmation.classList.toggle("orderHidden");
 
